@@ -1,0 +1,56 @@
+.container {
+  width: 100%;
+  max-width: 800px; /* Changer la largeur maximale selon vos besoins */
+  margin-left: 20px; /* Pour aligner à gauche de l'écran */
+  padding: 20px;
+
+  .card-body {
+      .title {
+          font-size: 16px; /* Taille de police plus petite pour le titre */
+          font-weight: bold; /* Gras pour le titre */
+          margin-bottom: 10px; /* Espacement sous le titre */
+          margin-top: 20px; /* Espacement sous le titre */
+      }
+
+      .line {
+          height: 2px;
+          width: 20%;
+          background-color: #000; /* Couleur de la ligne noire */
+          margin-bottom: 10px; /* Espacement après la ligne */
+      }
+
+      .data-container {
+          width: 100%;
+          max-width: 800px;
+          margin-left: 20px;
+          padding: 20px;
+
+          .form-select {
+              width: 100px; // Définissez la largeur souhaitée pour les éléments select
+          }
+
+          .input-group {
+            
+                  .form-label {
+                      width: 100%;
+                      margin-bottom: 5px;
+                  }
+
+                  .form-control {
+                      width: calc(50% - 30px);
+                      padding: 8px;
+                      border: 1px solid #ccc;
+                      border-radius: 4px;
+                      box-sizing: border-box;
+                      margin-top: 5px;
+                      margin-right: 20px; /* Adjust margin between inputs */
+                  }
+              }
+
+              .input-row {
+                  margin-bottom: 10px; /* Add margin-bottom for line break */
+              }
+          }
+      }
+  }
+

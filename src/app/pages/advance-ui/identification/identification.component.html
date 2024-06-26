@@ -1,0 +1,903 @@
+
+<app-breadcrumbs
+  title="identification"
+  [breadcrumbItems]="breadCrumbItems"
+></app-breadcrumbs>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-header align-items-center d-flex">
+        <h4 class="card-title mb-0 flex-grow-1">Default Select</h4>
+      </div>
+      <!-- end card header -->
+      <div class="card-body">
+        <p class="text-muted">
+          Use attribute with numerous options to show value with choice's
+          option.
+        </p>
+        <div class="live-preview">
+          <div class="row">
+            <div class="col-lg-2 d-flex justify-content-between align-items-center">
+              <div class="me-5"> <!-- Ajoute un espacement de 0.5rem à gauche -->
+                  <label for="programInput" class="form-label">Programme</label>
+                  <input type="password" class="form-control mb-3" id="programInput" />
+              </div>
+              <button type="button" class="btn btn-dark custom-toggle active" (click)="LunchModal(LunchDataModal)"  data-bs-toggle="modal" data-bs-target="#LunchDemoDataModal">
+                  <i class="bx bx-plus-medical"></i>
+              </button>
+          </div>
+          
+            
+        
+            <div class="col-lg-2 me-5">
+              <div class="d-flex justify-content-sm-end"></div>
+              <label for="gouvernoratSelect" class="form-label"
+                >Gouvernorat</label
+              >
+              <select class="form-select mb-3" id="gouvernoratSelect">
+                <option selected>Choose...</option>
+                <option>Option 1</option>
+                <option>Option 2</option>
+                <option>Option 3</option>
+              </select>
+             
+            </div>
+        
+            <div class="col-lg-2 col-md-3">
+              <label for="delegationSelect" class="form-label"
+                >Délégation</label
+              >
+              <select class="form-select mb-3" id="delegationSelect">
+                <option selected>Choose...</option>
+                <option>Option 1</option>
+                <option>Option 2</option>
+                <option>Option 3</option>
+              </select>
+            </div>
+        
+            <div class="col-lg-2 col-md-3">
+              <label for="communeSelect" class="form-label">Communes</label>
+              <select class="form-select mb-3" id="communeSelect">
+                <option selected>Choose...</option>
+                <option>Option 1</option>
+                <option>Option 2</option>
+                <option>Option 3</option>
+              </select>
+            </div>
+        
+            <div class="col-lg-2 col-md-3">
+              <div>
+                <label for="quartierInput" class="form-label">Quartier</label>
+                <input
+                  type="password"
+                  class="form-control mb-3"
+                  id="quartierInput"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card">
+              <div class="card-header align-items-center d-flex"></div>
+              <!-- end card header -->
+              <div class="card-body">
+                <div class="live-preview">
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <div
+                        ngbAccordion
+                        activeIds="static-1"
+                        [closeOthers]="false"
+                        class="custom-accordionwithicon accordion-border-box"
+                      >
+                        <div
+                          ngbAccordionItem
+                          class="material-shadow"
+                          id="static-1"
+                        >
+                          <div
+                            ngbAccordionHeader
+                            class="accordion-header border-0 bg-transparent"
+                          >
+                            <button ngbAccordionButton>
+                              Données générales:
+                            </button>
+                          </div>
+                          <div ngbAccordionCollapse>
+                            <div ngbAccordionBody>
+                              <div class="container">
+                                <div class="row form-group mb-3">
+                                  <!-- Ajout de mb-3 pour la marge en bas -->
+                                  <label
+                                    for="surface"
+                                    class="col-sm-4 col-form-label"
+                                    >Surface (Ha)</label
+                                  >
+                                  <div class="col-sm-8">
+                                    <input
+                                      type="text"
+                                      class="form-control"
+                                      id="surface"
+                                    />
+                                  </div>
+                                </div>
+                                <div class="row form-group mb-3">
+                                  <!-- Ajout de mb-3 pour la marge en bas -->
+                                  <label
+                                    for="surface-urb"
+                                    class="col-sm-4 col-form-label"
+                                    >Surface Urbanisée (ha)</label
+                                  >
+                                  <div class="col-sm-8">
+                                    <input
+                                      type="text"
+                                      class="form-control"
+                                      id="surface-urb"
+                                    />
+                                  </div>
+                                </div>
+                                <div class="row form-group mb-3">
+                                  <!-- Ajout de mb-3 pour la marge en bas -->
+                                  <label
+                                    for="nombre-logements"
+                                    class="col-sm-4 col-form-label"
+                                    >Nombre de logements</label
+                                  >
+                                  <div class="col-sm-8">
+                                    <input
+                                      type="text"
+                                      class="form-control"
+                                      id="nombre-logements"
+                                    />
+                                  </div>
+                                </div>
+                                <div class="row form-group mb-3">
+                                  <!-- Ajout de mb-3 pour la marge en bas -->
+                                  <label
+                                    for="densite"
+                                    class="col-sm-4 col-form-label"
+                                    >Densité (logts/ha)</label
+                                  >
+                                  <div class="col-sm-8">
+                                    <input
+                                      type="text"
+                                      class="form-control"
+                                      id="densite"
+                                    />
+                                  </div>
+                                </div>
+                              </div>
+                              <div
+                                class="accordion nesting2-accordion custom-accordionwithicon accordion-border-box mt-3"
+                                id="accordionnesting2"
+                              >
+                                <div
+                                  ngbAccordion
+                                  [closeOthers]="true"
+                                  class="custom-accordionwithicon accordion-border-box"
+                                >
+                                  <div
+                                    ngbAccordionItem
+                                    class="material-shadow"
+                                    id="static-5"
+                                  >
+                                    <div
+                                      ngbAccordionHeader
+                                      class="accordion-header border-0 bg-transparent"
+                                    >
+                                      <button ngbAccordionButton>
+                                        Toylologie logements:
+                                      </button>
+                                    </div>
+                                    <div ngbAccordionCollapse>
+                                      <div ngbAccordionBody>
+                                        <div class="container">
+                                          <div class="row mb-3">
+                                            <!-- mb-3 ajoute une marge en dessous de la rangée -->
+                                            <div class="col-md-4">
+                                              <label for="typical-housing"
+                                                >Logements Typiques</label
+                                              >
+                                            </div>
+                                            <div class="col-md-4">
+                                              <select
+                                                id="typical-housing"
+                                                class="form-control"
+                                              >
+                                                <option>Maison</option>
+                                                <!-- Autres options ici -->
+                                              </select>
+                                            </div>
+                                            <div class="col-md-4">
+                                              <input
+                                                type="text"
+                                                class="form-control"
+                                                placeholder="Votre texte ici"
+                                              />
+                                            </div>
+                                          </div>
+                                          <div class="row">
+                                            <div class="col-md-4">
+                                              <label for="modern-housing"
+                                                >Logements Moderne</label
+                                              >
+                                            </div>
+                                            <div class="col-md-4">
+                                              <select
+                                                id="modern-housing"
+                                                class="form-control"
+                                              >
+                                                <option>Appartement</option>
+                                                <!-- Autres options ici -->
+                                              </select>
+                                            </div>
+                                            <div class="col-md-4">
+                                              <input
+                                                type="text"
+                                                class="form-control"
+                                                placeholder="Votre texte ici"
+                                              />
+                                            </div>
+                                          </div>
+                                          <div class="row">
+                                            <div class="col-md-4">
+                                              <label for="modern-housing"
+                                                >Logements Moderne</label
+                                              >
+                                            </div>
+                                              <div class="col-md-4">
+                                                <div class="form-check">
+                                                  <input
+                                                  class="form-check-input"
+                                                  type="radio"
+                                                  name="rating"
+                                                  value="good"
+                                                  id="radio1"
+                                                />
+                                                <label
+                                                  class="form-check-label"
+                                                  for="radio1"
+                                                >
+                                                  Bonne
+                                                </label>
+                                              </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                              <div class="form-check">
+                                                <input
+                                                  class="form-check-input"
+                                                  type="radio"
+                                                  name="rating"
+                                                  value="average"
+                                                  id="radio2"
+                                                />
+                                                <label
+                                                  class="form-check-label"
+                                                  for="radio2"
+                                                >
+                                                  Moyenne
+                                                </label>
+                                              </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                              <div class="form-check">
+                                                <input
+                                                  class="form-check-input"
+                                                  type="radio"
+                                                  name="rating"
+                                                  value="bad"
+                                                  id="radio3"
+                                                />
+                                                <label
+                                                  class="form-check-label"
+                                                  for="radio3"
+                                                >
+                                                  Mauvaise
+                                                </label>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+
+
+                                  <div ngbAccordion class="material-shadow" id="static-6">
+  <div ngbAccordionItem class="material-shadow" id="static-6">
+    <div ngbAccordionHeader class="accordion-header border-0 bg-transparent">
+      <button ngbAccordionButton>
+        Taux de couverture des réseaux:
+      </button>
+    </div>
+    <div ngbAccordionCollapse>
+      <div ngbAccordionBody>
+        <div class="row form-group mb-3">
+          <label for="surface" class="col-sm-4 col-form-label">Assainissement</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" id="surface" />
+          </div>
+        </div>
+        <div class="row form-group mb-3">
+          <label for="surface-urb" class="col-sm-4 col-form-label">Voirie</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" id="surface-urb" />
+          </div>
+        </div>
+        <div class="row form-group mb-3">
+          <label for="nombre-logements" class="col-sm-4 col-form-label">Eclairage Public</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" id="nombre-logements" />
+          </div>
+        </div>
+        <div class="row form-group mb-3">
+          <label for="densite" class="col-sm-4 col-form-label">Drainage des Eaux pluviales</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control" id="densite" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+                                  <div
+                                    ngbAccordionItem
+                                    class="material-shadow"
+                                    id="static-6"
+                                  >
+                                    <div
+                                      ngbAccordionHeader
+                                      class="accordion-header border-0 bg-transparent"
+                                    >
+                                      <button ngbAccordionButton>
+                                        observation:
+                                      </button>
+                                    </div>
+                                    <div ngbAccordionCollapse>
+                                      <div ngbAccordionBody>
+                                        <div class="row">
+                                          <p class="text-muted">
+                                            Use attribute with numerous options
+                                            to show value with choice's option.
+                                          </p>
+
+                                          <textarea
+                                            class="form-control"
+                                            id="exampleTextarea"
+                                            rows="3"
+                                          ></textarea>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div
+                        ngbAccordion
+                        activeIds="static-1"
+                        [closeOthers]="true"
+                        class="custom-accordionwithicon accordion-border-box mt-3"
+                      >
+                        <div
+                          ngbAccordionItem
+                          class="material-shadow"
+                          id="static-1"
+                        >
+                          <div
+                            ngbAccordionHeader
+                            class="accordion-header border-0 bg-transparent"
+                          >
+                            <button ngbAccordionButton>
+                              Programme d'intervention et Coût prévisionnel:
+                            </button>
+                          </div>
+                          <div ngbAccordionCollapse>
+                            <div ngbAccordionBody>
+                              <div
+                                class="accordion nesting2-accordion custom-accordionwithicon accordion-border-box"
+                                id="accordionnesting2"
+                              >
+                                <div
+                                  ngbAccordion
+                                  [closeOthers]="true"
+                                  class="custom-accordionwithicon accordion-border-box"
+                                >
+                                  <div
+                                    ngbAccordionItem
+                                    class="material-shadow"
+                                    id="static-5"
+                                  >
+                                    <div
+                                      ngbAccordionHeader
+                                      class="accordion-header border-0 bg-transparent"
+                                    >
+                                      <button ngbAccordionButton>
+                                        Composentes:
+                                      </button>
+                                    </div>
+                                    <div ngbAccordionCollapse>
+                                      <div ngbAccordionBody>
+                                        <form action="">
+                                          <div class="row mb-3">
+                                            <div class="col-lg-3">
+                                              <label
+                                                for="nameInput"
+                                                class="form-label"
+                                                >Infrastructures
+                                              </label>
+                                            </div>
+                                            <div class="col-lg-9">
+                                              <select
+                                                class="form-select"
+                                                id="gouvernoratSelect"
+                                              >
+                                                <option selected>
+                                                  Choose...
+                                                </option>
+                                                <option>
+                                                  Assainissement (km)
+                                                </option>
+                                                <option>Option 2</option>
+                                                <option>Option 3</option>
+                                              </select>
+                                            </div>
+                                          </div>
+                                          <div class="row mb-3">
+                                            <div class="col-lg-3">
+                                              <label
+                                                for="websiteUrl"
+                                                class="form-label"
+                                                >Quantitées</label
+                                              >
+                                            </div>
+                                            <div class="col-lg-9">
+                                              <input
+                                                type="text"
+                                                class="form-control"
+                                                id="websiteUrl"
+                                                placeholder=""
+                                              />
+                                            </div>
+                                          </div>
+                                          <div class="row mb-3">
+                                            <div class="col-lg-3">
+                                              <label
+                                                for="dateInput"
+                                                class="form-label"
+                                                >Coût en Md
+                                              </label>
+                                            </div>
+                                            <div class="col-lg-9">
+                                              <input
+                                                type="text"
+                                                class="form-control"
+                                                id="dateInput"
+                                              />
+                                            </div>
+                                          </div>
+                                        </form>
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                  <div
+                                    ngbAccordionItem
+                                    class="material-shadow"
+                                    id="static-5"
+                                  >
+                                    <div
+                                      ngbAccordionHeader
+                                      class="accordion-header border-0 bg-transparent"
+                                    >
+                                      <button ngbAccordionButton>
+                                        Amélioration de l'habitat( U ):
+                                      </button>
+                                    </div>
+                                    <div ngbAccordionCollapse>
+                                      <div ngbAccordionBody>
+                                        <form action="">
+                                          <div class="row mb-3">
+                                            <div class="col-lg-3">
+                                              <label
+                                                for="nameInput"
+                                                class="form-label"
+                                                >Equipement Publics
+                                              </label>
+                                            </div>
+                                            <div class="col-lg-9">
+                                              <select
+                                                class="form-select"
+                                                id="gouvernoratSelect"
+                                              >
+                                                <option selected>
+                                                  Choose...
+                                                </option>
+                                                <option>
+                                                  Salle Polyvalente
+                                                </option>
+                                                <option>Option 2</option>
+                                                <option>Option 3</option>
+                                              </select>
+                                            </div>
+                                          </div>
+                                          <div class="row mb-3">
+                                            <div class="col-lg-3">
+                                              <label
+                                                for="websiteUrl"
+                                                class="form-label"
+                                                >Quantitées</label
+                                              >
+                                            </div>
+                                            <div class="col-lg-9">
+                                              <input
+                                                type="text"
+                                                class="form-control"
+                                                id="websiteUrl"
+                                                placeholder=""
+                                              />
+                                            </div>
+                                          </div>
+                                          <div class="row mb-3">
+                                            <div class="col-lg-3">
+                                              <label
+                                                for="dateInput"
+                                                class="form-label"
+                                                >Coût en Md
+                                              </label>
+                                            </div>
+                                            <div class="col-lg-9">
+                                              <input
+                                                type="text"
+                                                class="form-control"
+                                                id="dateInput"
+                                              />
+                                            </div>
+                                          </div>
+                                          <div class="row mb-3">
+                                            <div class="col-lg-3">
+                                              <label
+                                                for="dateInput"
+                                                class="form-label"
+                                                >Total
+                                              </label>
+                                            </div>
+                                            <div class="col-lg-9">
+                                              <input
+                                                type="text"
+                                                disabled
+                                                class="form-control"
+                                                id="dateInput"
+                                              />
+                                            </div>
+                                          </div>
+                                        </form>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row mt-3" >
+                        <div class="col-lg-4">
+                          <div class="card">
+                            <div class="card-header">
+                                 <div class="text-center">
+
+                              <label class="form-label mb-0">
+                                Multiple File Upload
+                              </label>
+                              </div>
+                            </div>
+                            <!-- end card header -->
+
+                            <div class="card-body">
+                              <dropzone class="dropzone_sec"></dropzone>
+                            </div>
+                            <!-- end dropzon-preview -->
+                            <!-- end card body -->
+                          </div>
+                          <!-- end card -->
+                        </div>
+
+                        <div class="col-lg-4">
+                          <div class="card">
+                            <div class="card-header">
+                                <div class="text-center">
+
+                                    <label class="form-label mb-0">
+                                      Multiple File Upload
+                                    </label>
+                                    </div>
+                            </div>
+                            <!-- end card header -->
+
+                            <div class="card-body">
+                              <dropzone class="dropzone_sec"></dropzone>
+                            </div>
+                            <!-- end dropzon-preview -->
+                            <!-- end card body -->
+                          </div>
+                          <!-- end card -->
+                        </div>
+
+                        <div class="col-lg-4">
+                          <div class="card">
+                            <div class="card-header">
+                                <div class="text-center">
+
+                              <label class="form-label mb-0">
+                                Multiple File Upload
+                              </label>
+                              </div>
+                            </div>
+                            <!-- end card header -->
+
+                            <div class="card-body">
+                              <dropzone class="dropzone_sec"></dropzone>
+                            </div>
+                            <!-- end dropzon-preview -->
+                            <!-- end card body -->
+                          </div>
+                          <!-- end card -->
+                        </div>
+                      </div>
+                      <div class="col-12">
+                        <div class="text-center">
+                          <button type="submit" class="btn btn-primary">
+                            Enregistrer
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="col-lg-12">
+                      <div class="card">
+                        <div class="card-header">
+                          <h4 class="card-title mb-0">
+                            Markers, Circles and Polygons
+                          </h4>
+                        </div>
+                        <!-- end card header -->
+
+                        <div class="card-body">
+                          <div id="map" style="height: 400px;"></div>
+                          <!-- <div
+                            style="height: 300px"
+                            leaflet
+                            [leafletOptions]="markers"
+                            [leafletLayers]="markersLayers"
+                          ></div> -->
+                        </div>
+                        <!-- end card-body -->
+                      </div>
+                      <!-- end card -->
+                    </div>
+                  </div>
+                  <!-- end card-body -->
+                </div>
+                <!-- end card -->
+              </div>
+              <!--end col-->
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xxl-6">
+                <div class="card">
+                    <div class="card-header align-items-center d-flex">
+                        <h4 class="card-title mb-0 flex-grow-1">Grids in Modals</h4>
+                        
+                        </div>
+                    </div><!-- end card header -->
+                    <div class="card-body">
+                        <p class="text-muted">Use <code>container-fluid</code> class within the modal-body to utilize the
+                            Bootstrap grid system within a modal by nesting.</p>
+                        <div class="live-preview">
+                          <button type="button" class="btn btn-primary" (click)="scrollModal(scrollDataModal)"  data-bs-toggle="modal" data-bs-target="#LunchDemoDataModal">
+                            Launch Demo Modal
+                        </button>
+                        
+                        </div>
+                      <!-- Grids in modals -->
+
+
+                    </div><!-- end card-body -->
+                </div><!-- end card -->
+            </div>
+
+
+
+            <ng-template #scrollDataModal role="document" let-modal>
+              <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalScrollableTitle">Scrollable Modal</h5>
+                  <button type="button" class="btn-close" aria-hidden="true" (click)="modal.dismiss('Cross click')"></button>
+              </div>
+              <div class="modal-body">
+                  <h6 class="fs-15">Give your text a good structure</h6>
+                  <div class="d-flex">
+                      <div class="flex-shrink-0">
+                          <i class="ri-checkbox-circle-fill text-success"></i>
+                      </div>
+                      <div class="flex-grow-1 ms-2">
+                          <p class="text-muted mb-0">Raw denim you probably haven't heard of them jean shorts Austin.
+                              Nesciunt tofu stumptown aliqua, retro synth master cleanse.</p>
+                      </div>
+                  </div>
+                  <div class="d-flex mt-2">
+                      <div class="flex-shrink-0">
+                          <i class="ri-checkbox-circle-fill text-success"></i>
+                      </div>
+                      <div class="flex-grow-1 ms-2 ">
+                          <p class="text-muted mb-0">Too much or too little spacing, as in the example below, can make things
+                              unpleasant for the reader. The goal is to make your text as comfortable to read as possible. </p>
+                      </div>
+                  </div>
+                  <div class="d-flex mt-2">
+                      <div class="flex-shrink-0">
+                          <i class="ri-checkbox-circle-fill text-success"></i>
+                      </div>
+                      <div class="flex-grow-1 ms-2 ">
+                          <p class="text-muted mb-0">In some designs, you might adjust your tracking to create a certain artistic
+                              effect. It can also help you fix fonts that are poorly spaced to begin with.</p>
+                      </div>
+                  </div>
+                  <div class="d-flex mt-2">
+                      <div class="flex-shrink-0">
+                          <i class="ri-checkbox-circle-fill text-success"></i>
+                      </div>
+                      <div class="flex-grow-1 ms-2 ">
+                          <p class="text-muted mb-0">For that very reason, I went on a quest and spoke to many different
+                              professional graphic designers and asked them what graphic design tips they live.</p>
+                      </div>
+                  </div>
+                  <div class="d-flex mt-2">
+                      <div class="flex-shrink-0">
+                          <i class="ri-checkbox-circle-fill text-success"></i>
+                      </div>
+                      <div class="flex-grow-1 ms-2 ">
+                          <p class="text-muted mb-0">You've probably heard that opposites attract. The same is true for fonts.
+                              Don't be afraid to combine font styles that are different but complementary, like sans serif with
+                              serif, short with tall, or decorative with simple. Qui photo booth letterpress, commodo enim craft
+                              beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR.</p>
+                      </div>
+                  </div>
+                  <div class="d-flex mt-2">
+                      <div class="flex-shrink-0">
+                          <i class="ri-checkbox-circle-fill text-success"></i>
+                      </div>
+                      <div class="flex-grow-1 ms-2 ">
+                          <p class="text-muted mb-0">For that very reason, I went on a quest and spoke to many different
+                              professional graphic designers and asked them what graphic design tips they live.</p>
+                      </div>
+                  </div>
+                  <h6 class="fs-16 my-3">Graphic Design</h6>
+                  <div class="d-flex mt-2">
+                      <div class="flex-shrink-0">
+                          <i class="ri-checkbox-circle-fill text-success"></i>
+                      </div>
+                      <div class="flex-grow-1 ms-2 ">
+                          <p class="text-muted mb-0">Opposites attract, and that’s a fact. It’s in our nature to be interested in
+                              the unusual, and that’s why using contrasting colors in Graphic Design is a must. It’s eye-catching,
+                              it makes a statement, it’s impressive graphic design. Increase or decrease the letter spacing
+                              depending.</p>
+                      </div>
+                  </div>
+                  <div class="d-flex mt-2">
+                      <div class="flex-shrink-0">
+                          <i class="ri-checkbox-circle-fill text-success"></i>
+                      </div>
+                      <div class="flex-grow-1 ms-2 ">
+                          <p class="text-muted mb-0">Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party
+                              before they sold out master cleanse gluten-free squid scenester freegan cosby sweater.</p>
+                      </div>
+                  </div>
+                  <div class="d-flex mt-2">
+                      <div class="flex-shrink-0">
+                          <i class="ri-checkbox-circle-fill text-success"></i>
+                      </div>
+                      <div class="flex-grow-1 ms-2 ">
+                          <p class="text-muted mb-0">Just like in the image where we talked about using multiple fonts, you can
+                              see that the background in this graphic design is blurred. Whenever you put text on top of an image,
+                              it’s important that your viewers can understand.</p>
+                      </div>
+                  </div>
+                  <div class="d-flex mt-2">
+                      <div class="flex-shrink-0">
+                          <i class="ri-checkbox-circle-fill text-success"></i>
+                      </div>
+                      <div class="flex-grow-1 ms-2 ">
+                          <p class="text-muted mb-0">Keytar raw denim keffiyeh etsy art party before they sold out master cleanse
+                              gluten-free squid scenester freegan cosby sweater.</p>
+                      </div>
+                  </div>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-light material-shadow-none" (click)="modal.close('Close click')">Close</button>
+                  <button type="button" class="btn btn-primary">Save changes</button>
+              </div>
+          </ng-template>
+          
+
+          <div class="live-preview">
+            
+           
+            <button type="button" class="btn btn-primary" >
+              Launch Demo Modal
+          </button>
+            <!--end col-->
+            <ng-template #LunchDataModal let-modal>
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalgridLabel">Grid Modals</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                          (click)="modal.dismiss('Cross click')"></button>
+                  </div>
+                  <div class="modal-body">
+                      <form action="javascript:void(0);">
+                          <div class="row g-3">
+                              
+                              <div class="col-lg-12">
+                                  <label class="form-label">Gender</label>
+                                  <div>
+                                    <table class="table table-bordered" id="example">
+                                      <thead class="thead-light">
+                                        <tr>
+                                          <th>#</th>
+                                          <th>Category Name</th>
+                                          <th class="text-right">Action</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <tr>
+                                          <td>1</td>
+                                          <td contenteditable="true">Batiment</td>
+                                          <td class="text-right">
+                                            <button type="button" class="btn btn-secondary rounded f-14 p-2 delete-category" data-cat-id="1">
+                                              Delete
+                                            </button>
+                                          </td>
+                                        </tr>
+                                        <!-- Ajoutez d'autres lignes de tableau dynamiques ici -->
+                                      </tbody>
+                                    </table>
+                            
+                                     
+                                     
+                                  </div>
+                              </div>
+                              <!--end col-->
+                             
+                              
+                              <!--end col-->
+                              <div class="col-lg-12">
+                                  <div class="hstack gap-2 justify-content-end">
+                                      <button type="button" class="btn btn-light" data-bs-dismiss="modal"
+                                          (click)="modal.close('Close click')">Close</button>
+                                      <button type="submit" class="btn btn-primary">Save</button>
+                                  </div>
+                              </div>
+                              <!--end col-->
+                          </div>
+                          <!--end row-->
+                      </form>
+                  </div>
+              </div>
+          </ng-template>
+          
+        </div>
+      </div>
+    
+
+
