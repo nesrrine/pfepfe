@@ -40,10 +40,8 @@ const routes: Routes = [
     path: "scrollspy",
     component: ScrollspyComponent
   },
-  {
-    path: "identification",
-    component: IdentificationComponent
-  }
+  { path: 'identification', component: IdentificationComponent }
+
 ];
 
 @NgModule({
