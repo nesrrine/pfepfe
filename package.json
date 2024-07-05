@@ -68,6 +68,7 @@
     "leaflet": "^1.9.4",
     "leaflet-draw": "^1.0.4",
     "leaflet-fullscreen": "^1.0.2",
+    "leaflet.fullscreen": "^3.0.2",
     "lottie-web": "^5.12.2",
     "masonry-layout": "^4.2.2",
     "metismenujs": "^1.4.0",

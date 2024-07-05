@@ -18,6 +18,7 @@ import lottie from 'lottie-web';
 import { DropzoneModule } from 'ngx-dropzone-wrapper';
 import { DROPZONE_CONFIG } from 'ngx-dropzone-wrapper';
 import { DropzoneConfigInterface } from 'ngx-dropzone-wrapper';
+import { ReactiveFormsModule } from '@angular/forms';
 
 // Component pages
 import { AsvanceUiRoutingModule } from './advance-ui-routing.module';
@@ -52,6 +53,8 @@ import { LeafletComponent } from '../maps/leaflet/leaflet.component';
     DropzoneModule,
     NgbModule,
     FormsModule,
+    ReactiveFormsModule, // Assurez-vous que ReactiveFormsModule est importé
+
     NgbDropdownModule,
     NgbAccordionModule,
     NgbRatingModule,
