@@ -1004,6 +1004,13 @@ export const MENU: MenuItem[] = [
             label: 'MENUITEMS.ADVANCEUI.LIST.IDENTIFICATION',
             link: '/advance-ui/identification',
             parentId: 121
+            
+          },
+          {
+            id: 123,
+            label: 'MENUITEMS.ADVANCEUI.LIST.tableau',
+            link: '/advance-ui/tableau',
+            parentId: 121
           },
           {
             id: 124,

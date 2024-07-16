@@ -1,0 +1,129 @@
+<p>tableau works!</p>
+<app-breadcrumbs title="tableau" [breadcrumbItems]="breadCrumbItems"></app-breadcrumbs>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title mb-0">Add, Edit & Remove</h4>
+            </div>
+            <div class="card-body">
+                <div id="customerList">
+                    <div class="row g-4 mb-3">
+                        <div class="col-sm-auto">
+                            <div class="d-flex gap-1">
+                                <button type="button" class="btn btn-success add-btn"  id="create-btn"  ><i class="ri-add-line align-bottom me-1"></i> Add</button>
+
+                                <button class="btn btn-soft-danger" ><i class="ri-delete-bin-2-line"></i></button>
+                                
+                            </div>
+                        </div>
+                        <div class="col-sm">
+                            <div class="d-flex justify-content-sm-end">
+                                <div class="search-box ms-2">
+                                    <input type="text" class="form-control search" placeholder="Search...">
+                                    <i class="ri-search-line search-icon"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-responsive table-card mt-3 mb-1">
+                        <table class="table">
+                            <thead>
+                                <tr class="bg-light text-muted">
+                                    <th scope="col" style="width: 50px;">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="checkAll" value="option">
+                                        </div>
+                                    </th>
+                                    <th>Nom Quartier</th>
+                                    <th>Surface</th>
+                                    <th>Nombre d'habitant</th>
+                                    <th>Nombre Logement</th>
+                                    <th>Estimation</th>
+                                    <th>Photos</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="checkAll" value="">
+                                        </div>
+                                    </th>
+                                    <td>Customer Name</td>
+                                    <td>customerexample.com</td>
+                                    <td>123456789</td>
+                                    <td>2024-05-12</td>
+                                    <td>Delivered</td>
+                                   
+        <td>
+            <div class="upload-btn-wrapper">
+                <button type="button" class="btn btn-dark btn-sm w-xs waves-effect waves-light">Choisir une photo</button>
+                <input type="file" name="fileUpload" id="fileUpload" accept="image/*" (change)="onFileSelected($event)">
+            </div>
+            <div class="image-preview" *ngIf="imageUrl">
+                <img [src]="imageUrl" alt="Uploaded Image">
+            </div>
+        </td>
+       
+                                    
+
+                                    <td>
+                                        <div class="d-flex gap-2">
+                                            <div class="edit">
+                                                <button class="btn btn-sm btn-success edit-item-btn" data-bs-toggle="modal" data-bs-target="#showModal">Edit</button>
+                                            </div>
+                                            <div class="remove">
+                                                <button class="btn btn-sm btn-danger remove-item-btn" data-bs-toggle="modal" data-bs-target="#deleteRecordModal">Remove</button>
+                                            </div>
+                                            
+                                               
+                                            <div class="folder" (click)="toggleFolder()">
+                                                    <button type="button" class="btn btn-sm btn-info bg-gradient waves-effect waves-light"><i class="ri-folder-2-fill"></i></button>
+
+                                              </div>
+                                              <div *ngIf="isFolderOpen" class="folder-content">
+                                                <!-- Affichez ici le contenu du dossier (images et PDF) -->
+                                                <ul>
+                                                  <li>Image 1</li>
+                                                  <li>Image 2</li>
+                                                  <li>PDF File</li>
+                                                </ul>
+                                                <input type="file" (change)="onFileSelected($event)" accept="image/*,.pdf">
+                                              </div>
+                                                
+                                            
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row justify-content-md-between align-items-md-center">
+                        <div class="col col-sm-6">
+                            <div class="dataTables_info mb-2" id="tickets-table_info" role="status" aria-live="polite">
+                                Showing 1 to 1 of 1 entries
+                            </div>
+                        </div>
+                        <div class="col col-sm-6">
+                            <div class="text-sm-right float-sm-end listjs-pagination">
+                                <ul class="pagination">
+                                    <li class="page-item disabled">
+                                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                                    </li>
+                                    <li class="page-item active" aria-current="page">
+                                        <a class="page-link" href="#">1 <span class="visually-hidden">(current)</span></a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="#">Next</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

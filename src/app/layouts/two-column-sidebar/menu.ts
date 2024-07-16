@@ -1019,6 +1019,12 @@ export const MENU: MenuItem[] = [
         parentId: 121
       },
       {
+        id: 123,
+        label: 'MENUITEMS.ADVANCEUI.LIST.tableau',
+        link: '/advance-ui/tableau',
+        parentId: 121
+      },
+      {
         id: 124,
         label: 'MENUITEMS.ADVANCEUI.LIST.SCROLLBAR',
         link: '/advance-ui/scrollbar',

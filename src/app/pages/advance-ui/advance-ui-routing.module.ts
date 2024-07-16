@@ -10,6 +10,7 @@ import { RatingsComponent } from "./ratings/ratings.component";
 import { HighlightComponent } from "./highlight/highlight.component";
 import { ScrollspyComponent } from "./scrollspy/scrollspy.component";
 import { IdentificationComponent} from "./identification/identification.component";
+import { TableauComponent } from './identification/tableau/tableau.component';
 
 const routes: Routes = [
   {
@@ -40,7 +41,12 @@ const routes: Routes = [
     path: "scrollspy",
     component: ScrollspyComponent
   },
-  { path: 'identification', component: IdentificationComponent }
+  { path: 'identification', component: IdentificationComponent },
+  {
+    path: "tableau",
+    component: TableauComponent
+  }
+
 
 ];
 
