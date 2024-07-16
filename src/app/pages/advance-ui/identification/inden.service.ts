@@ -19,7 +19,7 @@ import { Infrastructurestype } from "./Infrastructurestype.model";
   providedIn: 'root'
 })
 export class ProgrammeService {
-  private baseUrl = 'http://localhost:8088/auth'; // Ajustez cette URL de base selon votre application Spring Boot
+  private baseUrl = 'http://localhost:8086/auth'; // Ajustez cette URL de base selon votre application Spring Boot
 
   constructor(private http: HttpClient) { }
 
@@ -194,6 +194,7 @@ export class ProgrammeService {
   deleteCouvertureReseauById(id: number): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/couverture/${id}`);
   }
+ 
   
   getObservations(): Observable<Observation[]> {
     return this.http.get<Observation[]>(this.baseUrl);
@@ -222,7 +223,14 @@ export class ProgrammeService {
   getAllInterventions(): Observable<ProgrammeIntervention[]> {
     return this.http.get<ProgrammeIntervention[]>(`${this.baseUrl}/getAllInterventions`);
   }
-
+  deleteProgrammeInterventionById(id: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/ProgrammeIntervention/delete/${id}`)
+    
+  }
+  getProgrammeInterventionById(id: number): Observable<ProgrammeIntervention> {
+    return this.http.get<ProgrammeIntervention>(`${this.baseUrl}/ProgrammeIntervention/${id}`)
+     
+  }
   calculateTotalCost(): Observable<number> {
     return this.http.get<number>(`${this.baseUrl}/total`);
   }
@@ -233,7 +241,11 @@ export class ProgrammeService {
   getAllTypes(): Observable<Infrastructurestype[]> {
     return this.http.get<Infrastructurestype[]>(`${this.baseUrl}/Infrastructurestypes`);
   }
+  deleteInfrastructureType(id: number): Observable<any> {
+    return this.http.delete<void>(`${this.baseUrl}/deleteInfrastructureType/${id}`);
+  }
 
+ 
   getMarkers(): Observable<any> {
     return this.http.get(this.baseUrl);
   }

@@ -28,7 +28,7 @@ import { TypeReseau } from './TypeReseau.model';
 import { CouvertureReseaux} from './CouvertureReseaux.model';
 import { Observation } from './Observation.model';
 import { FormControl } from '@angular/forms';
-
+import { Infrastructurestype } from './Infrastructurestype.model';
 declare module 'leaflet' {
   namespace control {
   
@@ -46,7 +46,7 @@ declare module 'leaflet' {
 export class IdentificationComponent implements OnInit { 
   observations: Observation[] = [];
   pourcentage: number = 0; // Define the pourcentage property
-
+  Infrastructurestypes:Infrastructurestype[]=[];
   donneeGenerale: DonneeGenerale = new DonneeGenerale();
   logementsTypiques: LogementTypique[] = [];
   logementsModernes: LogementModerne[] = [];
@@ -65,7 +65,6 @@ export class IdentificationComponent implements OnInit {
   breadCrumbItems: { label: string; active?: boolean; }[] = [];
   submitted = false;
   display = 'none';
-  InvoicesForm: FormGroup;
   showAddItemButton: boolean = true;
   donneegeneraleName: string = '';
   programmeName: string = ''; // Déclarez la propriété programmeName
@@ -77,7 +76,6 @@ export class IdentificationComponent implements OnInit {
   quartierName:string='';
   nouveauNom: string = ''; // Définissez le type et initialisez-le selon vos besoins
   numericErrorMessage: string = '';
-  userForm!: FormGroup; // Assurez-vous que le type est correctement défini
   i: number = 0;
 
   map: L.Map = {} as L.Map;
@@ -92,7 +90,8 @@ export class IdentificationComponent implements OnInit {
   typeReseauName: string= '';
    quartier:any;
    selectedTypeReseauId: number = 0;
-
+   InfrastructurestypeName:String='';
+   userForm!: FormGroup; // Assurez-vous que le type est correctement défini
 
 constructor(private formBuilder: FormBuilder, private modalService: NgbModal, private programmeService: ProgrammeService) { 
  // Pour userForm
@@ -108,27 +107,7 @@ constructor(private formBuilder: FormBuilder, private modalService: NgbModal, pr
   this.selectedGouvernoratId = 0;
   this.selectedDelegationId = 0; // Assurez-vous de l'initialiser avec une valeur appropriée
 
-  this.InvoicesForm = this.formBuilder.group({
-    companyAddress: ['', [Validators.required]],
-    companyaddpostalcode: ['', [Validators.required]],
-    registrationNumber: ['', [Validators.required]],
-    companyEmail: ['', [Validators.required]],
-    companyWebsite: ['', [Validators.required]],
-    companyContactno: ['', [Validators.required]],
-    billingName: ['', [Validators.required]],
-    billingAddress: ['', [Validators.required]],
-    billingPhoneno: ['', [Validators.required]],
-    billingTaxno: ['', [Validators.required]],
-    same: ['', [Validators.required]],
-    shippingName: ['', [Validators.required]],
-    shippingAddress: ['', [Validators.required]],
-    shippingPhoneno: ['', [Validators.required]],
-    shippingTaxno: ['', [Validators.required]],
-    productName: ['', [Validators.required]],
-    rate: ['', [Validators.required]],
-    items: [''],
-    densite: [{ value: '', disabled: true }] 
-  });    
+
 }
 
  
@@ -158,7 +137,7 @@ ngOnInit(): void {
   this.loadTypeReseaux();
   this.initializeMap();
   this.initializeDrawing();
-
+this.loadInfrastructurestype();
   this.breadCrumbItems = [
     { label: 'Invoices' },
     { label: 'Invoice Details', active: true }
@@ -185,7 +164,9 @@ items(): FormArray {
 newItem(): FormGroup {
   return this.formBuilder.group({
     typeReseauId: ['', Validators.required],
-    pourcentage: ['', [Validators.required, Validators.min(0), Validators.max(100)]]
+    pourcentage: ['', [Validators.required, Validators.min(0), Validators.max(100)]],
+    quantites: ['', Validators.required],
+    infrastructurestypeId: ['', Validators.required]
   });
 }
 
@@ -220,6 +201,74 @@ createCouvertureReseau(): void {
     console.error('Form is invalid.');
   }
 }
+
+loadInfrastructurestype(): void {
+  this.programmeService.getAllTypes().subscribe(res => {
+    this.Infrastructurestypes = res;
+  });}
+
+deleteInfrastructurestype(id: number | undefined): void {
+  if (id !== undefined) {
+    this.programmeService.deleteInfrastructureType(id).subscribe(
+      () => {
+        console.log('Type d\'infrastructure supprimé');
+        this.loadInfrastructurestype(); // Recharge la liste des types d'infrastructures après la suppression
+      },
+      error => {
+        console.error('Erreur lors de la suppression du type d\'infrastructure', error);
+        // Gérer les erreurs ici, si nécessaire
+      }
+    );
+  } else {
+    console.error('ID du type d\'infrastructure est indéfini');
+  }
+}
+createNewInfrastructurestype(): void {
+  const newInfrastructurestype: Infrastructurestype = { 
+    id: 0, 
+    type: this.InfrastructurestypeName.trim(),
+    infrastructurestypeList: []  // Initialisation avec une liste vide
+  };
+
+  if (!newInfrastructurestype.type) {
+    alert('Please enter a Type Infrastructures');
+    return;
+  }
+
+  this.programmeService.addType(newInfrastructurestype).subscribe(
+    res => {
+      this.Infrastructurestypes.push(res); // Ajout du nouveau type de réseau à la liste
+      this.InfrastructurestypeName = ''; // Réinitialisation du champ InfrastructurestypeName après l'ajout
+    },
+    error => {
+      console.error('Error creating new Type Infrastructures:', error);
+      alert('Error creating new Type Infrastructures. Please try again later.');
+    }
+  );
+}
+addIntervention(): void {
+  if (this.userForm.valid) {
+    const infrastructurestypeList = this.userForm.value.items.map((item: any) => ({
+      quantites: item.quantites,
+      infrastructurestype: { id: item.infrastructurestypeId, type: '', infrastructurestypeList: [] } as Infrastructurestype
+    }));
+
+    this.programmeService.addIntervention(infrastructurestypeList).subscribe(
+      (response) => {
+        console.log('Nouvelle intervention créée :', response);
+        this.userForm.reset();
+        this.items().clear();
+        this.addItem();
+      },
+      (error) => {
+        console.error('Erreur lors de la création de l\'intervention :', error);
+      }
+    );
+  } else {
+    console.error('Le formulaire n\'est pas valide.');
+  }
+}
+
 
 onTypeReseauChange(event: any, index: number): void {
   const selectedTypeReseauId = event.target.value;
@@ -264,30 +313,6 @@ createNewTypeReseau(): void {
 }
 
 
-
-  // createCommune(): void {
-  //   if (this.communeName && this.selectedDelegationId !== 0) {
-  //     const newCommune: Commune = {
-  //       id: 0,
-  //       name: this.communeName,
-  //       delegation: { id: this.selectedDelegationId, name: '', gouvernorat: { id: 0, name: '' } },
-  //     };
-
-  //     this.programmeService.createCommune(newCommune).subscribe(
-  //       (createdCommune: Commune) => {
-  //         console.log('New commune created:', createdCommune);
-  //         this.communes.push(createdCommune);
-  //         this.communeName = '';
-  //       },
-  //       error => {
-  //         console.error('Error creating commune:', error);
-  //       }
-  //     );
-  //   } else {
-  //     console.error('Please fill in all fields.');
-  //   }
-  // }
-  
   deleteTypeReseau(id: number | undefined): void {
     if (id !== undefined) {
       this.programmeService.deleteTypeReseauById(id).subscribe(() => {
@@ -303,7 +328,7 @@ createNewTypeReseau(): void {
     this.programmeService.getAllTypeReseaux().subscribe(res => {
       this.typeReseaux = res;
     });}
-
+ 
   loadCouvertureReseaux(): void {
     this.programmeService.getAllCouvertureReseaux().subscribe(res => {
       this.couvertureReseaux = res;
@@ -351,6 +376,8 @@ createNewTypeReseau(): void {
       }
     );
   }
+ 
+  
  // Méthode pour mettre à jour un logement
  updateLogement(id: number | undefined, updatedLogement: Logement) {
   if (id === undefined) {
@@ -1035,18 +1062,11 @@ getItemFormControls(): AbstractControl[] {
   }
 
   
-   /**
-  * Save user
-  */
+
    saveUser() {
     this.submitted = true
   }
-   /**
-   * Form data get
-   */
-   get form() {
-    return this.InvoicesForm.controls;
-  }
+ 
   addOption() {
     if (this.programmeName.trim() !== '') {
       // Create a new Programme object
