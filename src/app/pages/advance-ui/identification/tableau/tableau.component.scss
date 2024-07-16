@@ -1,0 +1,29 @@
+.upload-btn-wrapper {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+
+    input[type="file"] {
+        font-size: 100px;
+        position: absolute;
+        left: 0;
+        top: 0;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+  
+}
+
+.image-preview {
+    margin-top: 5px;
+
+    img {
+        max-width: 150px; // Limiter la largeur de l'image à 150 pixels
+        max-height: 150px; // Limiter la hauteur de l'image à 150 pixels
+        height: auto;
+        border: 2px solid #ddd;
+        border-radius: 8px;
+        padding: 5px;
+    }
+}

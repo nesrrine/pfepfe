@@ -32,6 +32,7 @@ import { HighlightComponent } from './highlight/highlight.component';
 import { ScrollspyComponent } from './scrollspy/scrollspy.component';
 import { IdentificationComponent } from "./identification/identification.component";
 import { FormsModule } from '@angular/forms';
+import { TableauComponent } from './identification/tableau/tableau.component';
 
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 
@@ -47,6 +48,8 @@ import { LeafletComponent } from '../maps/leaflet/leaflet.component';
     HighlightComponent,
     ScrollspyComponent,
     IdentificationComponent,
+    TableauComponent,
+
   ],
   imports: [
     CommonModule,

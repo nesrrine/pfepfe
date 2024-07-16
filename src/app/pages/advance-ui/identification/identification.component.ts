@@ -148,7 +148,74 @@ this.loadInfrastructurestype();
 
   
 }
-  
+
+
+loadInfrastructurestype(): void {
+  this.programmeService.getAllTypes().subscribe(res => {
+    this.Infrastructurestypes = res;
+  });}
+
+deleteInfrastructurestype(id: number | undefined): void {
+  if (id !== undefined) {
+    this.programmeService.deleteInfrastructureType(id).subscribe(
+      () => {
+        console.log('Type d\'infrastructure supprimé');
+        this.loadInfrastructurestype(); // Recharge la liste des types d'infrastructures après la suppression
+      },
+      error => {
+        console.error('Erreur lors de la suppression du type d\'infrastructure', error);
+        // Gérer les erreurs ici, si nécessaire
+      }
+    );
+  } else {
+    console.error('ID du type d\'infrastructure est indéfini');
+  }
+}
+createNewInfrastructurestype(): void {
+  const newInfrastructurestype: Infrastructurestype = { 
+    id: 0, 
+    type: this.InfrastructurestypeName.trim(),
+    infrastructurestypeList: []  // Initialisation avec une liste vide
+  };
+
+  if (!newInfrastructurestype.type) {
+    alert('Please enter a Type Infrastructures');
+    return;
+  }
+
+  this.programmeService.addType(newInfrastructurestype).subscribe(
+    res => {
+      this.Infrastructurestypes.push(res); // Ajout du nouveau type de réseau à la liste
+      this.InfrastructurestypeName = ''; // Réinitialisation du champ InfrastructurestypeName après l'ajout
+    },
+    error => {
+      console.error('Error creating new Type Infrastructures:', error);
+      alert('Error creating new Type Infrastructures. Please try again later.');
+    }
+  );
+}
+addIntervention(): void {
+  if (this.userForm.valid) {
+    const infrastructurestypeList = this.userForm.value.items.map((item: any) => ({
+      quantites: item.quantites,
+      infrastructurestype: { id: item.infrastructurestypeId, type: '', infrastructurestypeList: [] } as Infrastructurestype
+    }));
+
+    this.programmeService.addIntervention(infrastructurestypeList).subscribe(
+      (response) => {
+        console.log('Nouvelle intervention créée :', response);
+        this.userForm.reset();
+        this.items().clear();
+        this.addItem();
+      },
+      (error) => {
+        console.error('Erreur lors de la création de l\'intervention :', error);
+      }
+    );
+  } else {
+    console.error('Le formulaire n\'est pas valide.');
+  }
+}
 
 
 createItem(): FormGroup {
@@ -955,7 +1022,14 @@ control.fullscreen().addTo(this.map);
 
   initializeDrawing() {
     this.drawingLayer = L.featureGroup().addTo(this.map);
-    
+  
+    const customMarkerIcon = L.icon({
+      iconUrl: 'assets/images/pin.png',
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+      popupAnchor: [1, -34]
+    });
+  
     const drawControl = new L.Control.Draw({
       position: 'topleft',
       edit: {
@@ -963,7 +1037,10 @@ control.fullscreen().addTo(this.map);
       },
       draw: {
         polyline: false,
-        marker: false,
+        marker: {
+          icon: customMarkerIcon,
+          repeatMode: true
+        },
         polygon: {
           allowIntersection: true,
           drawError: {
@@ -996,17 +1073,17 @@ control.fullscreen().addTo(this.map);
         }
       }
     });
-    // const baseLayers = {
-    //   'OpenStreetMap': osmTileLayer,
-    //   'Google Maps': googleTileLayer
-    // };
-    //L.control.layers(this.baseLayers).addTo(this.map);
+  
     this.map.addControl(drawControl);
-
+  
     this.map.on('draw:created', (event: any) => {
       const layer = event.layer;
+      this.addMarkerWithPopup(layer);
       this.drawingLayer.addLayer(layer);
     });
+  }
+  addMarkerWithPopup(marker: L.Marker) {
+    marker.bindPopup('<b>Details:</b> Your details here').openPopup();
   }
    /**
    * Lunch modal
@@ -1089,6 +1166,19 @@ getItemFormControls(): AbstractControl[] {
     // Méthode pour ouvrir le modal
     this.modalService.open(content);
   }
+  isFolderOpen: boolean = false;
+
+toggleFolder() {
+  this.isFolderOpen = !this.isFolderOpen;
+}
+
+onFileSelected(event: any) {
+  const file: File = event.target.files[0];
+  if (file) {
+    // Envoyez le fichier à votre backend pour le télécharger ou traitez-le localement
+    console.log('Selected file:', file);
+  }
+}
   
   
   

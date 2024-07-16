@@ -528,76 +528,7 @@
                       </div>
                     </div>
 
-                    <div class="row mt-3">
-                      <div class="col-lg-4">
-                        <div class="card">
-                          <div class="card-header">
-                            <div class="text-center">
-
-                              <label class="form-label mb-0">
-                                Multiple File Upload
-                              </label>
-                            </div>
-                          </div>
-                          <!-- end card header -->
-
-                          <div class="card-body">
-                            <dropzone class="dropzone_sec"></dropzone>
-                          </div>
-                          <!-- end dropzon-preview -->
-                          <!-- end card body -->
-                        </div>
-                        <!-- end card -->
-                      </div>
-
-                      <div class="col-lg-4">
-                        <div class="card">
-                          <div class="card-header">
-                            <div class="text-center">
-
-                              <label class="form-label mb-0">
-                                Multiple File Upload
-                              </label>
-                            </div>
-                          </div>
-                          <!-- end card header -->
-
-                          <div class="card-body">
-                            <dropzone class="dropzone_sec"></dropzone>
-                          </div>
-                          <!-- end dropzon-preview -->
-                          <!-- end card body -->
-                        </div>
-                        <!-- end card -->
-                      </div>
-
-                      <div class="col-lg-4">
-                        <div class="card">
-                          <div class="card-header">
-                            <div class="text-center">
-
-                              <label class="form-label mb-0">
-                                Multiple File Upload
-                              </label>
-                            </div>
-                          </div>
-                          <!-- end card header -->
-
-                          <div class="card-body">
-                            <dropzone class="dropzone_sec"></dropzone>
-                          </div>
-                          <!-- end dropzon-preview -->
-                          <!-- end card body -->
-                        </div>
-                        <!-- end card -->
-                      </div>
-                    </div>
-                    <div class="col-12">
-                      <div class="text-center">
-                        <button type="button" class="btn btn-primary" (click)="saveData()">Enregistrer</button>
-
-                      </div>
-                    </div>
+                 
                   </div>
 
                   <div class="col-lg-12">
@@ -617,6 +548,62 @@
                             [leafletOptions]="markers"
                             [leafletLayers]="markersLayers"
                           ></div> -->
+                      </div>
+                      <div class="row mt-3">
+                        <div class="col-lg-4">
+                          
+                            <div class="folder" (click)="toggleFolder()">
+                              <i class="ri-folder-2-fill"></i> Délimitation
+                            </div>
+                            <div *ngIf="isFolderOpen" class="folder-content">
+                              
+                              
+                              <input type="file" (change)="onFileSelected($event)" accept="image/*,.pdf">
+                            </div>
+                            <!-- end card header -->
+  
+                           
+                            
+                            <!-- end card body -->
+                          
+                          <!-- end card -->
+                        </div>
+  
+                        <div class="col-lg-4">
+                          
+                            <div class="folder" (click)="toggleFolder()">
+                              <i class="ri-folder-2-fill"></i> Images de Quartier
+                            </div>
+                            <div *ngIf="isFolderOpen" class="folder-content">
+                         
+                              <input type="file" (change)="onFileSelected($event)" accept="image/*,.pdf">
+                            </div>
+  
+                            
+                            <!-- end card body -->
+                          
+                          <!-- end card -->
+                        </div>
+  
+                        <div class="col-lg-4">
+                            <div class="folder" (click)="toggleFolder()">
+                              <i class="ri-folder-2-fill"></i> PV de Confirmation
+                            </div>
+                            <div *ngIf="isFolderOpen" class="folder-content">
+                             
+                              <input type="file" (change)="onFileSelected($event)" accept="image/*,.pdf">
+                            </div>
+                          
+                            <!-- end card body -->
+                          
+                          <!-- end card -->
+                        </div>
+                      </div>
+                      <div class="col-12">
+                        <div class="text-center">
+                          <button type="button" class="btn btn-primary" (click)="saveData()">Enregistrer</button>
+  
+                        </div>
                       </div>
                       <!-- end card-body -->
                     </div>
