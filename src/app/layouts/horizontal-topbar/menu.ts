@@ -1001,14 +1001,14 @@ export const MENU: MenuItem[] = [
         subItems: [
           {
             id: 122,
-            label: 'MENUITEMS.ADVANCEUI.LIST.IDENTIFICATION',
+            label: 'IDENTIFICATION',
             link: '/advance-ui/identification',
             parentId: 121
             
           },
           {
             id: 123,
-            label: 'MENUITEMS.ADVANCEUI.LIST.tableau',
+            label: 'tableau',
             link: '/advance-ui/tableau',
             parentId: 121
           },
