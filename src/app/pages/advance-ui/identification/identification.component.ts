@@ -89,116 +89,165 @@ export class IdentificationComponent implements OnInit {
   programme: any; // Définir la propriété programme
   gouvernorat: any;
   communes: Commune[] = [];
-  errorMessage: string = "";
-  typeReseauName: string = "";
-  quartier: any;
-  selectedTypeReseauId: number = 0;
-  InfrastructurestypeName: String = "";
-  userForm!: FormGroup; // Assurez-vous que le type est correctement défini
+  errorMessage: string= '';
+  typeReseauName: string= '';
+   quartier:any;
+   selectedTypeReseauId: number = 0;
+   InfrastructurestypeName:String='';
+   userForm!: FormGroup; // Assurez-vous que le type est correctement défini
 
-  constructor(
-    private formBuilder: FormBuilder,
-    private modalService: NgbModal,
-    private programmeService: ProgrammeService
-  ) {
-    // Pour userForm
-    this.userForm = this.formBuilder.group({
-      items: this.formBuilder.array([]), // Initialiser avec un tableau vide
-    });
+constructor(private formBuilder: FormBuilder, private modalService: NgbModal, private programmeService: ProgrammeService) { 
+ // Pour userForm
+ this.userForm = this.formBuilder.group({
+  items: this.formBuilder.array([]) // Initialiser avec un tableau vide
+});
 
-    this.selectedGouvernoratId = 0;
-    this.selectedDelegationId = 0; // Assurez-vous de l'initialiser avec une valeur appropriée
-  }
 
-  ngOnInit(): void {
-    this.pourcentage = 0; // Initialisation du pourcentage
-    this.selectedTypeReseauId = 0; // Initialisation de l'ID du type de réseau
-    this.loadCouvertureReseaux();
 
-    // Charger tous les types de réseaux
-    this.programmeService.getAllTypeReseaux().subscribe(
-      (data: TypeReseau[]) => (this.typeReseaux = data),
-      (error) =>
-        console.error("Erreur lors du chargement des types de réseaux :", error)
+   
+  
+
+  this.selectedGouvernoratId = 0;
+  this.selectedDelegationId = 0; // Assurez-vous de l'initialiser avec une valeur appropriée
+
+
+}
+
+ 
+ngOnInit(): void {
+  this.pourcentage = 0; // Initialisation du pourcentage
+  this.selectedTypeReseauId = 0; // Initialisation de l'ID du type de réseau
+  this.loadCouvertureReseaux();
+
+  // Charger tous les types de réseaux
+  this.programmeService.getAllTypeReseaux().subscribe(
+    (data: TypeReseau[]) => this.typeReseaux = data,
+    error => console.error('Erreur lors du chargement des types de réseaux :', error)
+  );
+  this.loadAllLogements();
+  this.loadTypeReseaux();
+  this.loadCouvertureReseaux();
+  this.programmeService.getObservations().subscribe((data) => {
+    this.observations = data;
+  });
+  this.loadDelegationsByGouvernaurat(0);
+  this.loadCommunesByDelegation(0);
+  this.getQuartiers();
+  this.getAllProgrammes();
+  this.getAllGouvernorats();
+  this.loadGouvernorats();
+  this.addItem();
+  this.loadTypeReseaux();
+  this.initializeMap();
+  this.initializeDrawing();
+this.loadInfrastructurestype();
+  this.breadCrumbItems = [
+    { label: 'Invoices' },
+    { label: 'Invoice Details', active: true }
+  ];
+  this.userForm.controls['pourcentage'].setValidators([Validators.required]);
+  this.userForm.controls['items'].setValidators([Validators.required]);
+  // Définir le FormGroup avec les contrôles et les validations requises
+
+  
+}
+
+
+loadInfrastructurestype(): void {
+  this.programmeService.getAllTypes().subscribe(res => {
+    this.Infrastructurestypes = res;
+  });}
+
+deleteInfrastructurestype(id: number | undefined): void {
+  if (id !== undefined) {
+    this.programmeService.deleteInfrastructureType(id).subscribe(
+      () => {
+        console.log('Type d\'infrastructure supprimé');
+        this.loadInfrastructurestype(); // Recharge la liste des types d'infrastructures après la suppression
+      },
+      error => {
+        console.error('Erreur lors de la suppression du type d\'infrastructure', error);
+        // Gérer les erreurs ici, si nécessaire
+      }
     );
-    this.loadAllLogements();
-    this.loadTypeReseaux();
-    this.loadCouvertureReseaux();
-    this.programmeService.getObservations().subscribe((data) => {
-      this.observations = data;
-    });
-    this.loadDelegationsByGouvernaurat(0);
-    this.loadCommunesByDelegation(0);
-    this.getQuartiers();
-    this.getAllProgrammes();
-    this.getAllGouvernorats();
-    this.loadGouvernorats();
-    this.addItem();
-    this.loadTypeReseaux();
-    this.initializeMap();
-    this.initializeDrawing();
-    this.loadInfrastructurestype();
-    this.breadCrumbItems = [
-      { label: "Invoices" },
-      { label: "Invoice Details", active: true },
-    ];
-    this.userForm.controls["pourcentage"].setValidators([Validators.required]);
-    this.userForm.controls["items"].setValidators([Validators.required]);
-    // Définir le FormGroup avec les contrôles et les validations requises
+  } else {
+    console.error('ID du type d\'infrastructure est indéfini');
+  }
+}
+createNewInfrastructurestype(): void {
+  const newInfrastructurestype: Infrastructurestype = { 
+    id: 0, 
+    type: this.InfrastructurestypeName.trim(),
+    infrastructurestypeList: []  // Initialisation avec une liste vide
+  };
+
+  if (!newInfrastructurestype.type) {
+    alert('Please enter a Type Infrastructures');
+    return;
   }
 
-  deleteInfrastructurestype(id: number | undefined): void {
-    if (id !== undefined) {
-      this.programmeService.deleteInfrastructureType(id).subscribe(
-        () => {
-          console.log("Type d'infrastructure supprimé");
-          this.loadInfrastructurestype(); // Recharge la liste des types d'infrastructures après la suppression
-        },
-        (error) => {
-          console.error(
-            "Erreur lors de la suppression du type d'infrastructure",
-            error
-          );
-          // Gérer les erreurs ici, si nécessaire
-        }
-      );
-    } else {
-      console.error("ID du type d'infrastructure est indéfini");
+  this.programmeService.addType(newInfrastructurestype).subscribe(
+    res => {
+      this.Infrastructurestypes.push(res); // Ajout du nouveau type de réseau à la liste
+      this.InfrastructurestypeName = ''; // Réinitialisation du champ InfrastructurestypeName après l'ajout
+    },
+    error => {
+      console.error('Error creating new Type Infrastructures:', error);
+      alert('Error creating new Type Infrastructures. Please try again later.');
     }
-  }
+  );
+}
+addIntervention(): void {
+  if (this.userForm.valid) {
+    const infrastructurestypeList = this.userForm.value.items.map((item: any) => ({
+      quantites: item.quantites,
+      infrastructurestype: { id: item.infrastructurestypeId, type: '', infrastructurestypeList: [] } as Infrastructurestype
+    }));
 
-  createItem(): FormGroup {
-    return this.formBuilder.group({
-      typeReseauId: ["", Validators.required],
-      pourcentage: [
-        "",
-        [Validators.required, Validators.min(0), Validators.max(100)],
-      ],
-    });
+    this.programmeService.addIntervention(infrastructurestypeList).subscribe(
+      (response) => {
+        console.log('Nouvelle intervention créée :', response);
+        this.userForm.reset();
+        this.items().clear();
+        this.addItem();
+      },
+      (error) => {
+        console.error('Erreur lors de la création de l\'intervention :', error);
+      }
+    );
+  } else {
+    console.error('Le formulaire n\'est pas valide.');
   }
-  items(): FormArray {
-    return this.userForm.get("items") as FormArray; // Utiliser myForm au lieu de userForm
-  }
+}
 
-  newItem(): FormGroup {
-    return this.formBuilder.group({
-      typeReseauId: ["", Validators.required],
-      pourcentage: [
-        "",
-        [Validators.required, Validators.min(0), Validators.max(100)],
-      ],
-      quantites: ["", Validators.required],
-      infrastructurestypeId: ["", Validators.required],
-    });
-  }
+
+createItem(): FormGroup {
+  return this.formBuilder.group({
+    typeReseauId: ['', Validators.required],
+    pourcentage: ['', [Validators.required, Validators.min(0), Validators.max(100)]]
+  });
+}
+items(): FormArray {
+  return this.userForm.get('items') as FormArray; // Utiliser myForm au lieu de userForm
+}
+
+newItem(): FormGroup {
+  return this.formBuilder.group({
+    typeReseauId: ['', Validators.required],
+    pourcentage: ['', [Validators.required, Validators.min(0), Validators.max(100)]],
+    quantites: ['', Validators.required],
+    infrastructurestypeId: ['', Validators.required]
+  });
+}
 
   addItem(): void {
     this.items().push(this.newItem());
   }
 
-  removeItem(index: number): void {
-    this.items().removeAt(index);
-  }
+removeItem(index: number): void {
+  this.items().removeAt(index);
+}
+
 
   createCouvertureReseau(): void {
     if (this.userForm.valid) {
@@ -1031,14 +1080,14 @@ export class IdentificationComponent implements OnInit {
 
   initializeDrawing() {
     this.drawingLayer = L.featureGroup().addTo(this.map);
-
+  
     const customMarkerIcon = L.icon({
-      iconUrl: "assets/images/pin.png",
+      iconUrl: 'assets/images/pin.png',
       iconSize: [25, 41],
       iconAnchor: [12, 41],
-      popupAnchor: [1, -34],
+      popupAnchor: [1, -34]
     });
-
+  
     const drawControl = new L.Control.Draw({
       position: "topleft",
       edit: {
@@ -1048,7 +1097,7 @@ export class IdentificationComponent implements OnInit {
         polyline: false,
         marker: {
           icon: customMarkerIcon,
-          repeatMode: true,
+          repeatMode: true
         },
         polygon: {
           allowIntersection: true,
@@ -1082,19 +1131,18 @@ export class IdentificationComponent implements OnInit {
         },
       },
     });
-
+  
     this.map.addControl(drawControl);
-
-    this.map.on("draw:created", (event: any) => {
+  
+    this.map.on('draw:created', (event: any) => {
       const layer = event.layer;
-      this.addMarkerWithPopup(layer);
       this.drawingLayer.addLayer(layer);
     });
   }
   addMarkerWithPopup(marker: L.Marker) {
-    marker.bindPopup("<b>Details:</b> Your details here").openPopup();
+    marker.bindPopup('<b>Details:</b> Your details here').openPopup();
   }
-  /**
+   /**
    * Lunch modal
    * @param content modal Acontent
    */
@@ -1140,10 +1188,12 @@ export class IdentificationComponent implements OnInit {
     return (this.userForm.get("items") as FormArray).controls;
   }
 
-  saveUser() {
-    this.submitted = true;
-  }
+  
 
+   saveUser() {
+    this.submitted = true
+  }
+ 
   addOption() {
     if (this.programmeName.trim() !== "") {
       // Create a new Programme object
@@ -1165,15 +1215,18 @@ export class IdentificationComponent implements OnInit {
   }
   isFolderOpen: boolean = false;
 
-  toggleFolder() {
-    this.isFolderOpen = !this.isFolderOpen;
-  }
+toggleFolder() {
+  this.isFolderOpen = !this.isFolderOpen;
+}
 
-  onFileSelected(event: any) {
-    const file: File = event.target.files[0];
-    if (file) {
-      // Envoyez le fichier à votre backend pour le télécharger ou traitez-le localement
-      console.log("Selected file:", file);
-    }
+onFileSelected(event: any) {
+  const file: File = event.target.files[0];
+  if (file) {
+    // Envoyez le fichier à votre backend pour le télécharger ou traitez-le localement
+    console.log('Selected file:', file);
   }
+}
+  
+  
+  
 }
